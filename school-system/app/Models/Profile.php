@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-    //
+    public function student()
+    {
+        return $this->hasone(Student::class,'image_id');
+    }
+   
 }

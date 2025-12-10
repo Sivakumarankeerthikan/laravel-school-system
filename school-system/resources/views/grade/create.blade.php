@@ -17,6 +17,9 @@
                 <div class="row mt-4">
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Grade Name" id="grade_name" name="grade_name" required>
+                        @error('grade_name')
+                        <small>{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-5">

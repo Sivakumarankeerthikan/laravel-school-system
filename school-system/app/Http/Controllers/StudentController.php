@@ -14,9 +14,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::all();
-        $students = Student::all();
-        return view('student.index', ['profiles'=>$profiles, 'students'=>$students]);
+        // $students = Student::all();
+        // return view('student.index', ['students'=>$students]);
+        $students = Student::with('profile')->get();
+        return view('student.index', ['students' => $students]);
     }
 
     /**
@@ -33,6 +34,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'father_name'=>'required|string|max:20|unique:students.father_name',
+            'student_name'=>'required|string|max:20',
+            'admission_no'=>'required|string|max:5',
+            'grade'
+        ]);
         $profile = null;
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -48,7 +55,7 @@ class StudentController extends Controller
 
         $student = new Student();
         $student->image_id = $profile ? $profile->id : null;
-        $student->father_name = $request->input('father_name');
+        $student->father_name = $validate['father_name'];
         $student->student_name = $request->input('student_name');
         $student->admission_no = $request->input('admission_no');
         $student->grade = $request->input('grade');

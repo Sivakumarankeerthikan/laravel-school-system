@@ -28,10 +28,10 @@
 			<tr class="text-center">
                 @foreach ($students as $student)
 				<td>
-                    @foreach ($profiles as $profile)
-                        <a href=""><img src="{{ asset('storage/'.$profile->file_name) }}" height="80" width="80"
+
+                        <a href=""><img src="{{ asset('storage/'.$student->profile->file_name) }}" height="80" width="80"
 							style="border-radius:100px"></a>
-                    @endforeach
+                    
 				</td>
 				<td>
 					{{ $student->father_name }}
