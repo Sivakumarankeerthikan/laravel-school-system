@@ -29,7 +29,7 @@
                 @foreach ($students as $student)
 				<td>
                     @foreach ($profiles as $profile)
-                        <a href=""><img src="{{ $profile }}" height="80" width="80"
+                        <a href=""><img src="{{ asset('storage/'.$profile->file_name) }}" height="80" width="80"
 							style="border-radius:100px"></a>
                     @endforeach
 				</td>
