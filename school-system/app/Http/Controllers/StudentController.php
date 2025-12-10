@@ -59,6 +59,7 @@ class StudentController extends Controller
         $student->address = $request->input('address');
         $student->save();
         // $student->created_at = $request->input();
+        return redirect('students');
     }
 
     /**
@@ -67,7 +68,8 @@ class StudentController extends Controller
     public function show(string $id)
     {
         $student = Student::find($id);
-        return view('student.show', ['student'=>$student]);
+        $profile = Profile::find($id);
+        return view('student.show', ['student'=>$student, 'profile'=>$profile]);
     }
 
     /**
@@ -75,7 +77,8 @@ class StudentController extends Controller
      */
     public function edit(string $id)
     {
-        return view('student.edit');
+        $student = Student::find($id);
+        return view('student.edit',['student'=>$student]);
     }
 
     /**
@@ -83,7 +86,17 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = Student::find($id);
+        $student->father_name = $request->input('father_name');
+        $student->student_name = $request->input('student_name');
+        $student->admission_no = $request->input('admission_no');
+        $student->grade = $request->input('grade');
+        $student->nic_no = $request->input('nic_no');
+        $student->date_of_birth = $request->input('date_of_birth');
+        $student->gender = $request->input('gender');
+        $student->telephone_no = $request->input('telephone_no');
+        $student->address = $request->input('address');
+        $student->save();
     }
 
     /**
@@ -91,6 +104,8 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
+        return redirect('students');
     }
 }

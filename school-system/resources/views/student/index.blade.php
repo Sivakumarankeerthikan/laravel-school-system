@@ -47,11 +47,15 @@
 				<td>{{$student->telephone_no}}</td>
 				<td>{{$student->address}}</td>
 
-				<td><a href=""
-						onclick="return confirm('Do you want to delete')" class="btn btn-danger">delete</a>
+				<td>
+                    <form action="{{ route('students.destroy', ['student'=> $student]) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" value="Delete" onclick="return confirm('Do you want to delete')" class="btn btn-danger">
+                    </form>
 				</td>
-				<td><a href="" class="btn btn-warning">Edit</a></td>
-				<td><a href="" class="btn btn-info">Show</a></td>
+				<td><a href="{{ route('students.edit', ['student'=>$student->id]) }}" class="btn btn-warning">Edit</a></td>
+				<td><a href="{{ route('students.show', ['student'=>$student->id]) }}" class="btn btn-info">Show</a></td>
 				<td><a href="" class="btn btn-success">subject</a></td>
 			</tr>
 			@endforeach

@@ -43,7 +43,8 @@ class GradeController extends Controller
      */
     public function show(string $id)
     {
-        return view('grade.show');
+        $grade = Grade::find($id);
+        return view('grade.show',compact('grade'));
     }
 
     /**
@@ -51,7 +52,8 @@ class GradeController extends Controller
      */
     public function edit(string $id)
     {
-        return view('grade.edit');
+        $grade = Grade::find($id);
+        return view('grade.edit', compact('grade'));
     }
 
     /**
@@ -59,7 +61,13 @@ class GradeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $grade = Grade::find($id);
+        $grade->grade_name = $request->input('grade_name');
+        $grade->grade_group = $request->input('grade_group');
+        $grade->grade_color = $request->input('grade_color');
+        $grade->grade_order = $request->input('grade_order');
+        $grade->save();
+        return redirect('grades');
     }
 
     /**
@@ -67,6 +75,8 @@ class GradeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $grade = Grade::find($id);
+        $grade->delete();
+        return redirect('grades');
     }
 }

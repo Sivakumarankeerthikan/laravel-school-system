@@ -24,10 +24,16 @@
         <td>{{ $grade->grade_group }}</td>
         <td><input type="color" value="{{ $grade->grade_color }}"></td>
         <td>{{ $grade->grade_order }}</td>
-        <td><a href="" onclick="return confirm('Do you want to delete')"
-                class="btn btn-danger">delete</a></td>
-        <td><a href="" class="btn btn-warning">Edit</a></td>
-        <td><a href="" class="btn btn-info">Show</a></td>
+        <td>
+            <form action="{{ route('grades.destroy', compact('grade')) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Delete" onclick="return confirm('Do you want to delete')"
+                class="btn btn-danger">
+            </form>
+        </td>
+        <td><a href="{{ route('grades.edit',compact('grade')) }}" class="btn btn-warning">Edit</a></td>
+        <td><a href="{{ route('grades.show',compact('grade')) }}" class="btn btn-info">Show</a></td>
         <td><a href="" class="btn btn-success">Addsubjects</a></td>
     </tr>
     @endforeach
