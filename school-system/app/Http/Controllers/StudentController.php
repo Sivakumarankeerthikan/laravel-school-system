@@ -38,7 +38,8 @@ class StudentController extends Controller
             'father_name'=>'required|string|max:20|unique:students.father_name',
             'student_name'=>'required|string|max:20',
             'admission_no'=>'required|string|max:5',
-            'grade'
+            'grade'=>'required|string|',
+            'nic_no'=>'required|'
         ]);
         $profile = null;
         if ($request->hasFile('file')) {
