@@ -17,9 +17,8 @@
 		<th>Subject Number</th>
 		<th colspan="3">Actions</th>
 	</tr>
-
+         @foreach ($subjects as $subject)
 		<tr class="text-center">
-            @foreach ($subjects as $subject)
 			<td>{{ $subject->subject_name }}</td>
 			<td>{{ $subject->subject_index }}</td>
 			<td>{{$subject->subject_order}}</td>

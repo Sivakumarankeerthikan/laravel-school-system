@@ -72,7 +72,7 @@
                         <input type="text" class="form-control" placeholder="Telephone No" id="telephone_no"
                             name="telephone_no">
                         @error('telephone_no')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <small class="alert alert-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>

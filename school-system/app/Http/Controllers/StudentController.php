@@ -17,7 +17,7 @@ class StudentController extends Controller
     {
         // $students = Student::all();
         // return view('student.index', ['students'=>$students]);
-        $students = Student::with('profile')->get();
+        $students = Student::with('profile','gradeinfo')->get();
         return view('student.index', ['students' => $students]);
     }
 

@@ -18,8 +18,8 @@
         <th colspan="4">Actions</th>
     </tr>
 
+    @foreach ($grades as $grade)
     <tr class="text-center">
-        @foreach ($grades as $grade)
         <td>{{ $grade->grade_name }}</td>
         <td>{{ $grade->grade_group }}</td>
         <td><input type="color" value="{{ $grade->grade_color }}"></td>
@@ -34,7 +34,9 @@
         </td>
         <td><a href="{{ route('grades.edit',compact('grade')) }}" class="btn btn-warning">Edit</a></td>
         <td><a href="{{ route('grades.show',compact('grade')) }}" class="btn btn-info">Show</a></td>
-        <td><a href="{{ url('grade/addsubject',compact('grade')) }}" class="btn btn-success">Addsubjects</a></td>
+        {{-- <td><a href="{{ url('/addsubject/'.$grade->id) }}" class="btn btn-success">Addsubjects</a></td> --}}
+        <td><a href="{{ route('addsubject', $grade->id) }}" class="btn btn-success">Addsubjects</a></td>
+
     </tr>
     @endforeach
 </table>

@@ -81,9 +81,5 @@ class GradeController extends Controller
         return redirect('grades');
     }
 
-    public function addsubject(string $id)
-    {
-        $subjects = Subject::all();
-        return view('grade/addsubject', ['subjects'=>$subjects]);
-    }
+    
 }

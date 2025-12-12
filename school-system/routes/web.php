@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddsubjectController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -21,3 +22,11 @@ Route::resource('/students', StudentController::class);
 Route::resource('/subjects', SubjectController::class);
 
 Route::resource('/grades', GradeController::class);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
+
+
+Route::get('/addsubject/{id}',[AddsubjectController::class, 'showsubjects'])->name('addsubject');
+Route::post('/subject-store', [AddsubjectController::class, 'store'])->name('store');

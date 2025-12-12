@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
-
     public function profile(){
         return $this->belongsTo(Profile::class, 'image_id');
     }
+
+    public function gradeinfo()
+    {
+        return $this->belongsTo(Grade::class, 'grade');
+    }
+
 }

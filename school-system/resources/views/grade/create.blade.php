@@ -34,7 +34,7 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col">
-                        <input type="number" class="form-control" placeholder="Grade Order" id="grade_order" name="grade_order" required>
+                        <input type="number" class="form-control" placeholder="Grade Order" id="grade_order" name="grade_order" step="0.1" required>
                     </div>
                 </div>
                 <div class="row mt-5 mx-5">

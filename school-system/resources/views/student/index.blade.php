@@ -25,13 +25,11 @@
 		</tr>
 	</thead>
 	<tbody>
+         @foreach ($students as $student)
 			<tr class="text-center">
-                @foreach ($students as $student)
 				<td>
-
-                        <a href=""><img src="{{ asset('storage/'.$student->profile->file_name) }}" height="80" width="80"
+                    <a href=""><img src="{{ asset('storage/'.$student->profile->file_name) }}" height="80" width="80"
 							style="border-radius:100px"></a>
-                    
 				</td>
 				<td>
 					{{ $student->father_name }}
@@ -39,7 +37,7 @@
 				<td>{{ $student->student_name }}</td>
 				<td>{{ $student->admission_no }}</td>
 				<td>
-					{{ $student->grade }}
+					{{ $student->gradeinfo->grade_name }}
 				</td>
 				<td>{{ $student->nic_no }}</td>
 				<td>{{$student->date_of_birth}}</td>
