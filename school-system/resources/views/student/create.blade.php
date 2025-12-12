@@ -17,16 +17,25 @@
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Father Name" id="father_name"
                             name="father_name" required>
+                        @error('father_name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Student Name" id="student_name"
                             name="student_name" required>
+                            @error('student_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Admission No" id="admission_no"
                             name="admission_no" required>
+                        @error('admission_no')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col">
                         <select id="inputState" class="form-control" name="grade" id="grade">
@@ -41,6 +50,9 @@
                     <div class="col">
                         <input type="text" class="form-control" placeholder="NIC" id="nic_no" name="nic_no"
                             required>
+                        @error('nic_no')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col">
                         <input type="date" class="form-control" placeholder="Date of Birth" id="date_of_birth"
@@ -59,11 +71,17 @@
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Telephone No" id="telephone_no"
                             name="telephone_no">
+                        @error('telephone_no')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col">
                         <textarea id="address" class="form-control" name="address" rows="4" placeholder="Address"></textarea><br><br>
+                        @error('address')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-5 img-input">
