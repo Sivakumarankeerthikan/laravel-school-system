@@ -34,7 +34,7 @@
         </td>
         <td><a href="{{ route('grades.edit',compact('grade')) }}" class="btn btn-warning">Edit</a></td>
         <td><a href="{{ route('grades.show',compact('grade')) }}" class="btn btn-info">Show</a></td>
-        <td><a href="" class="btn btn-success">Addsubjects</a></td>
+        <td><a href="{{ url('grade/addsubject',compact('grade')) }}" class="btn btn-success">Addsubjects</a></td>
     </tr>
     @endforeach
 </table>

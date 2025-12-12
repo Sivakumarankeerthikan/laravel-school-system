@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -78,5 +79,11 @@ class GradeController extends Controller
         $grade = Grade::find($id);
         $grade->delete();
         return redirect('grades');
+    }
+
+    public function addsubject(string $id)
+    {
+        $subjects = Subject::all();
+        return view('grade/addsubject', ['subjects'=>$subjects]);
     }
 }
