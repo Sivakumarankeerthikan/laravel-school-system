@@ -11,8 +11,6 @@ class AddsubjectController extends Controller
     public function showsubjects(string $id)
     {
         $subjects = Subject::all();
-        // $selected_subject = Subject::find();
-
         return view('grade.addsubject', ['subjects'=>$subjects]);
     }
 
