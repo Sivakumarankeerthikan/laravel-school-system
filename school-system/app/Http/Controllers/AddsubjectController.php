@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AddSubject;
+use App\Models\Grade_Subject;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class AddsubjectController extends Controller
     public function store(Request $request)
     {
         foreach ($request->input('subjects') as $subject_id) {
-            $subjects_store = new AddSubject();
+            $subjects_store = new Grade_Subject();
             $subjects_store->grade_id = $request->input('grade_id');
             $subjects_store->subject_id = $subject_id;
             $subjects_store->save();
