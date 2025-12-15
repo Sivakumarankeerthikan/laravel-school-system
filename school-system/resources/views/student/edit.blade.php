@@ -31,7 +31,9 @@
                     <div class="col">
                         <select id="inputState" class="form-control" name="grade" id="grade">
                             <option selected>Choose Grade</option>
-                            <option value="10A">10A</option>
+                            @foreach ($grades as $grade)
+                                <option value="{{ $grade->id }}" {{ $student->gradeinfo->grade_name == $grade->grade_name ? 'selected' : '' }}>{{ $grade->grade_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

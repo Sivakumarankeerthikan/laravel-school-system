@@ -88,7 +88,8 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $student = Student::find($id);
-        return view('student.edit', ['student' => $student]);
+        $grades = Grade::all();
+        return view('student.edit', ['student' => $student, 'grades'=>$grades]);
     }
 
     /**
@@ -107,6 +108,7 @@ class StudentController extends Controller
         $student->telephone_no = $request->input('telephone_no');
         $student->address = $request->input('address');
         $student->save();
+        return redirect('students');
     }
 
     /**

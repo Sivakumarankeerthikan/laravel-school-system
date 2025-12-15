@@ -8,6 +8,6 @@ class Subject extends Model
 {
     public function grades()
     {
-        return $this->hasMany(Grade::class,'id');
+        return $this->hasMany(Grade::class,'grade_id');
     }
 }

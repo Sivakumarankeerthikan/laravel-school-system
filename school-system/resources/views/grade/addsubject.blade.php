@@ -7,7 +7,7 @@
     @method('POST')
     <label>Select Your Subjects</label><br>
     @foreach ($subjects as $subject)
-    <input type="text" name="grade_id" id="grade_id" value="{{ $subject->grades->id }}" hidden>
+    <input type="text" name="grade_id" id="grade_id" value="" hidden>
     <input type="checkbox" name="subjects[]" value="{{ $subject->id }}">
     <label>{{ $subject->subject_name }}</label><br>
     @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,7 +12,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('student.index');
+        $students = Student::with('profile','gradeinfo')->get();
+        return view('student.index', compact('students'));
     }
 
     /**
