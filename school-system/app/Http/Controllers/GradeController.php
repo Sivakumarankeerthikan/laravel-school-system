@@ -14,7 +14,8 @@ class GradeController extends Controller
     public function index()
     {
         $grades = Grade::all();
-        return view('grade.index',['grades'=>$grades]);
+        $subjects = Subject::all();
+        return view('grade.index',['grades'=>$grades, 'subjects'=>$subjects]);
     }
 
     /**
@@ -81,5 +82,5 @@ class GradeController extends Controller
         return redirect('grades');
     }
 
-    
+
 }

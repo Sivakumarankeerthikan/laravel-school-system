@@ -81,4 +81,6 @@ class SubjectController extends Controller
         $subject->delete();
         return redirect('subjects');
     }
+
+    
 }

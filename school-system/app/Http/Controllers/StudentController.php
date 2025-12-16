@@ -48,7 +48,7 @@ class StudentController extends Controller
             $file = $request->file('file');
             $path = $file->store('profiles', 'public');
             $profile = new Profile();
-            $profile->file_name = $path; // stored path
+            $profile->file_name = $path; 
             $profile->original_name = $file->getClientOriginalName();
             $profile->mime = $file->getClientMimeType();
             $profile->size = $file->getSize();
