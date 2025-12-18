@@ -84,8 +84,9 @@ class GradeController extends Controller
 
     public function AssignSubject(Request $request,$id){
         $grade = Grade::findOrFail($id);
-        $subjectIds= $request->input('subjects');
-        $grade->subjects()->syncWithoutDetaching($subjectIds);
+        $subjectIds= $request->input('subjects',[]);
+        $grade->subjects()->sync($subjectIds);
+        return redirect()->route('grades.index')->with('success', 'Subjects updated.');
 
     }
 

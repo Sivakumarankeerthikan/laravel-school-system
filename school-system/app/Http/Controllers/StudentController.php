@@ -48,7 +48,7 @@ class StudentController extends Controller
             $file = $request->file('file');
             $path = $file->store('profiles', 'public');
             $profile = new Profile();
-            $profile->file_name = $path; 
+            $profile->file_name = $path;
             $profile->original_name = $file->getClientOriginalName();
             $profile->mime = $file->getClientMimeType();
             $profile->size = $file->getSize();
@@ -88,8 +88,9 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $student = Student::find($id);
+
         $grades = Grade::all();
-        return view('student.edit', ['student' => $student, 'grades'=>$grades]);
+        return view('student.edit', ['student' => $student, 'grades' => $grades]);
     }
 
     /**
@@ -119,5 +120,9 @@ class StudentController extends Controller
         $student = Student::find($id);
         $student->delete();
         return redirect('students');
+    }
+
+    public function StudentSubject($id){
+        $subjects = Subject::findorFail($id);
     }
 }

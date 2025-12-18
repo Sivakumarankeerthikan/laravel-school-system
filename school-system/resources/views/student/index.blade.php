@@ -54,11 +54,10 @@
 				</td>
 				<td><a href="{{ route('students.edit', ['student'=>$student->id]) }}" class="btn btn-warning">Edit</a></td>
 				<td><a href="{{ route('students.show', ['student'=>$student->id]) }}" class="btn btn-info">Show</a></td>
-				<td><a href="" class="btn btn-success">subject</a></td>
+				<td><a href="#" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#addSubjectModal-{{ $student->id }}">Addsubjects</a></td>
 			</tr>
 			@endforeach
 	</tbody>
-
-
 </table>
 @endsection
