@@ -28,5 +28,6 @@ Route::resource('/grades', GradeController::class);
 // })->name('home');
 
 
-Route::get('/addsubject/{id}',[AddsubjectController::class, 'showsubjects'])->name('addsubject');
-Route::post('/subject-store', [AddsubjectController::class, 'store'])->name('store');
+
+Route::post('/subject-store/{id}', [GradeController::class, 'AssignSubject'])->name('addsubject');
+

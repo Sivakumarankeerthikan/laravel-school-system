@@ -16,6 +16,6 @@ class Grade extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'grade_subject');
+        return $this->belongsToMany(Subject::class, 'grade_subject')->withTimestamps();;
     }
 }
