@@ -30,4 +30,5 @@ Route::resource('/grades', GradeController::class);
 
 
 Route::post('/subject-store/{id}', [GradeController::class, 'AssignSubject'])->name('addsubject');
+Route::post('/student-subject/{id}', [StudentController::class, 'StudentSubject'])->name('storesubject');
 

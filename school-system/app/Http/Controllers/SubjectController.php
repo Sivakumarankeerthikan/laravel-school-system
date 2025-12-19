@@ -36,7 +36,7 @@ class SubjectController extends Controller
         $subjects->subject_color = $request->input('subject_color');
         $subjects->subject_number = $request->input('subject_number');
         $subjects->save();
-        return redirect('students');
+        return redirect('subjects');
     }
 
     /**
@@ -82,5 +82,5 @@ class SubjectController extends Controller
         return redirect('subjects');
     }
 
-    
+
 }

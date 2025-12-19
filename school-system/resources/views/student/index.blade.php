@@ -2,62 +2,95 @@
 @section('title', 'index')
 @section('content')
     <table class="table table-striped table-hover table-bordered" id="mytable">
-	<thead>
-		<tr class="sticky-top top-two">
-			<td colspan="16" class="text-center fs-3 fw-bold bg-info">
-				Students details
-				<a href="{{ route('students.create') }}" class="float-end btn btn-success my-1 mx-2">Create student</a>
-			</td>
-		</tr>
-		<tr class="text-center sticky-top top-three">
-			<!--<th>ID</th>-->
-			<th>Profile</th>
-			<th>Father Name</th>
-			<th>Student Name</th>
-			<th>Admission No</th>
-			<th>Grade</th>
-			<th>NIC</th>
-			<th>Birth Date</th>
-			<th>Gender</th>
-			<th>Phone</th>
-			<th>Address</th>
-			<th colspan="4">Actions</th>
-		</tr>
-	</thead>
-	<tbody>
-         @foreach ($students as $student)
-			<tr class="text-center">
-				<td>
-                    <a href=""><img src="{{ asset('storage/'.$student->profile->file_name) }}" height="80" width="80"
-							style="border-radius:100px"></a>
-				</td>
-				<td>
-					{{ $student->father_name }}
-				</td>
-				<td>{{ $student->student_name }}</td>
-				<td>{{ $student->admission_no }}</td>
-				<td>
-					{{ $student->gradeinfo->grade_name }}
-				</td>
-				<td>{{ $student->nic_no }}</td>
-				<td>{{$student->date_of_birth}}</td>
-				<td>{{$student->gender}}</td>
-				<td>{{$student->telephone_no}}</td>
-				<td>{{$student->address}}</td>
+        <thead>
+            <tr class="sticky-top top-two">
+                <td colspan="16" class="text-center fs-3 fw-bold bg-info">
+                    Students details
+                    <a href="{{ route('students.create') }}" class="float-end btn btn-success my-1 mx-2">Create student</a>
+                </td>
+            </tr>
+            <tr class="text-center sticky-top top-three">
+                <!--<th>ID</th>-->
+                <th>Profile</th>
+                <th>Father Name</th>
+                <th>Student Name</th>
+                <th>Admission No</th>
+                <th>Grade</th>
+                <th>NIC</th>
+                <th>Birth Date</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th colspan="4">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($students as $student)
+                <tr class="text-center">
+                    <td>
+                        <a href=""><img src="{{ asset('storage/' . $student->profile->file_name) }}" height="80"
+                                width="80" style="border-radius:100px"></a>
+                    </td>
+                    <td>
+                        {{ $student->father_name }}
+                    </td>
+                    <td>{{ $student->student_name }}</td>
+                    <td>{{ $student->admission_no }}</td>
+                    <td>
+                        {{ $student->gradeinfo->grade_name }}
+                    </td>
+                    <td>{{ $student->nic_no }}</td>
+                    <td>{{ $student->date_of_birth }}</td>
+                    <td>{{ $student->gender }}</td>
+                    <td>{{ $student->telephone_no }}</td>
+                    <td>{{ $student->address }}</td>
 
-				<td>
-                    <form action="{{ route('students.destroy', ['student'=> $student]) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Delete" onclick="return confirm('Do you want to delete')" class="btn btn-danger">
-                    </form>
-				</td>
-				<td><a href="{{ route('students.edit', ['student'=>$student->id]) }}" class="btn btn-warning">Edit</a></td>
-				<td><a href="{{ route('students.show', ['student'=>$student->id]) }}" class="btn btn-info">Show</a></td>
-				<td><a href="#" class="btn btn-success" data-bs-toggle="modal"
-                        data-bs-target="#addSubjectModal-{{ $student->id }}">Addsubjects</a></td>
-			</tr>
-			@endforeach
-	</tbody>
-</table>
+                    <td>
+                        <form action="{{ route('students.destroy', ['student' => $student]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Delete" onclick="return confirm('Do you want to delete')"
+                                class="btn btn-danger">
+                        </form>
+                    </td>
+                    <td><a href="{{ route('students.edit', ['student' => $student->id]) }}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td><a href="{{ route('students.show', ['student' => $student->id]) }}" class="btn btn-info">Show</a>
+                    </td>
+                    <td><a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $student->id }}">Addsubjects</a></td>
+                </tr>
+
+                <!-- Button trigger modal -->
+                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button> --}}
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal-{{ $student->id }}" tabindex="-1" aria-labelledby="exampleModalLabel-{{ $student->id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel-{{ $student->id }}">Student Subjects</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('storesubject', ['id' => $student->id]) }}" method="post">
+                                    @csrf
+                                    @foreach ($student->gradeinfo->subjects as $subject)
+                                        <input type="checkbox" name="subjects[]" value="{{ $subject->id }}" id="subject-{{ $student->id }}-{{ $subject->id }}"
+                                            {{ $student->subjects->contains('id', $subject->id) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="subject-{{ $student->id }}-{{ $subject->id }}">{{ $subject->subject_name }}</label><br>
+                                    @endforeach
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" value="Submit" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </tbody>
+    </table>
 @endsection

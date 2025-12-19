@@ -8,11 +8,11 @@ class Subject extends Model
 {
     public function grades()
     {
-        return $this->hasMany(Grade::class,'grade_id');
+        return $this->belongsToMany(Grade::class, 'grade_subject', 'subject_id', 'grade_id');
     }
 
     public function students()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class)->withTimestamps();
     }
 }

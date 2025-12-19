@@ -7,6 +7,7 @@ use App\Models\Profile;
 use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -15,9 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        // $students = Student::all();
-        // return view('student.index', ['students'=>$students]);
-        $students = Student::with('profile','gradeinfo')->get();
+        $students = Student::with('profile','gradeinfo.subjects')->get();
         return view('student.index', ['students' => $students]);
     }
 
@@ -96,9 +95,8 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Student $student)
     {
-        $student = Student::find($id);
         $student->father_name = $request->input('father_name');
         $student->student_name = $request->input('student_name');
         $student->admission_no = $request->input('admission_no');
@@ -109,8 +107,37 @@ class StudentController extends Controller
         $student->telephone_no = $request->input('telephone_no');
         $student->address = $request->input('address');
         $student->save();
+
+        $profile = $student->profile; // use relation
+
+        if ($request->hasFile('file')) {
+            // delete old image
+            if ($profile && Storage::disk('public')->exists($profile->file_name)) {
+                Storage::disk('public')->delete($profile->file_name);
+            }
+
+            // store new image
+            $file = $request->file('file');
+            $path = $file->store('profiles', 'public');
+
+            // update or create profile
+            if (! $profile) {
+                $profile = new Profile();
+            }
+            $profile->file_name = $path;
+            $profile->original_name = $file->getClientOriginalName();
+            $profile->mime = $file->getClientMimeType();
+            $profile->size = $file->getSize();
+            $profile->save();
+
+            // link profile to student if needed
+            $student->image_id = $profile->id;
+            $student->save();
+        }
+
         return redirect('students');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -122,7 +149,10 @@ class StudentController extends Controller
         return redirect('students');
     }
 
-    public function StudentSubject($id){
-        $subjects = Subject::findorFail($id);
+    public function StudentSubject(string $id, Request $request){
+        $student = Student::findorFail($id);
+        $subjectIds= $request->input('subjects',[]);
+        $student->subjects()->sync($subjectIds);
+        return redirect()->route('students.index')->with('success', 'Subjects updated.');
     }
 }

@@ -1,18 +1,31 @@
 @extends('index')
 @section('title', 'edit')
 @section('content')
+
 <style>
-    .img-input {
-        margin-top: -18px;
-    }
-</style>
+  .img-input {
+    margin-top: -20px;
+  }
+  img{
+    margin-top: -18px;
+  }
+  .action{
+    margin-top: -15px;
+  }
+  </style>
+
 <div class="container d-flex justify-content-center">
     <div class="card mt-3 p-4 rounded-4">
         <div class="row">
-            <form action="{{ route('students.update', ['student'=>$student]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('students.update', ['student'=>$student, 'profile'=>$student->profile->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <h3 class="text-center">Student Form</h3>
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <a href="#"><img src="{{ asset('storage/' . $student->profile->file_name) }}" height="80" width="80"
+                            style="border-radius:100px"></a>
+                    </div>
+                </div>
                 <div class="row mt-3">
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Father Name" id="father_name"

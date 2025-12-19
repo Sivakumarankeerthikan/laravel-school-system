@@ -95,7 +95,7 @@
                         <input type="reset" id="reset" value="Reset" class="btn btn-danger">
                     </div>
                     <div class="col">
-                        <a href="index.php?section=student&page=index" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                     <div class="col">
                         <input type="submit" id="submit" value="Submit" class="btn btn-success">

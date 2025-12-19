@@ -13,7 +13,8 @@
 	<table class="table table-striped table-hover table-bordered">
 		<tr>
 			<th colspan="2">
-				<a href=><img src="{{ asset('storage/'.$profile->file_name) }}" height="100" width="100" style="border-radius:100px"></a>
+                <a href=""><img src="{{ asset('storage/' . $student->profile->file_name) }}" height="100"
+                                width="100" style="border-radius:100px"></a>
 				<br><a href="" onclick="return confirm('Do you want to delete')"><i class="bi bi-trash"></i></a>
 			</th>
 		</tr>
